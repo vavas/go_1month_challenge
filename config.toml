@@ -1,0 +1,41 @@
+[Server]
+listen = ":8000"
+timeout = 15
+
+[Gnats]
+urls = ["nats://127.0.0.1:4222"]
+
+[[Handlers]]
+name = "content"
+request_regexes = [
+    ["", "^/contents/?$"],
+    ["", "^/contents/[a-f0-9]{24}/?$"],
+]ex
+external_subject = "content"
+internal_subject = "content"
+
+[[Handlers]]
+name = "calendars"
+request_regexes = [
+    ["", "^/calendars_oauth_callback.*$"],
+]
+external_subject = "calendars"
+internal_subject = "calendars"
+
+[[Handlers]]
+name = "auth"
+request_regexes = [
+    ["", "^/token/?$"],
+]
+external_subject = "auth"
+internal_subject = "auth"
+
+[[Handlers]]
+name = "accounts"
+request_regexes = [
+    ["", "^/account/?$"],
+    ["", "^/account/logo/?$"],
+
+]
+external_subject = "accounts"
+internal_subject = "accounts"
