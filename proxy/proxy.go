@@ -95,7 +95,6 @@ func (p *Proxy) HandleRequest(c *gin.Context) {
 		return
 	}
 	log.Printf("Recieved response from %v service\n", handler.Name)
-
 }
 
 // GetHandler is gin middleware that populates the current handler (if present).

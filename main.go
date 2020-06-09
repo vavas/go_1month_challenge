@@ -1,15 +1,15 @@
 package main
 
 import (
-	log2 "log"
+
+	"github.com/vavas/go_services/gnats"
+	"github.com/vavas/go_services/logger"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/vavas/go_1month_challenge/config"
 	"github.com/vavas/go_1month_challenge/gateway"
-	"github.com/vavas/go_services/services/gnats"
-	"github.com/vavas/go_services/services/logger"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -48,8 +48,8 @@ func main() {
 	log.Debug("API gateway started")
 	log.Debug("All systems online")
 
-	// Gracefully shutdown on kill signals
-	osSignalChan := make(chan os.Signal)
+	// Gracefully shutdownn on kill signals
+	osSignalChan := make(chan os.Signal, 1)
 	signal.Notify(
 		osSignalChan,
 		syscall.SIGHUP,

@@ -6,13 +6,13 @@ timeout = 15
 urls = ["nats://127.0.0.1:4222"]
 
 [[Handlers]]
-name = "content"
+name = "mc-edm"
 request_regexes = [
     ["", "^/contents/?$"],
     ["", "^/contents/[a-f0-9]{24}/?$"],
-]ex
-external_subject = "content"
-internal_subject = "content"
+]
+external_subject = "mc-edm"
+internal_subject = "mc-edm"
 
 [[Handlers]]
 name = "calendars"

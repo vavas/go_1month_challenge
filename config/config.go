@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/BurntSushi/toml"
-	"github.com/vavas/go_services/services/gnats"
+	gnats2 "github.com/vavas/go_services/gnats"
 	"log"
 )
 
@@ -40,6 +40,6 @@ func ReadConfig(configFile string) (config *Config) {
 // Config structure
 type Config struct {
 	Server   Server
-	Gnats    *gnats.Config
+	Gnats    *gnats2.Config
 	Handlers []*Handler
 }
