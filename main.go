@@ -1,7 +1,6 @@
 package main
 
 import (
-
 	"github.com/vavas/go_services/gnats"
 	"github.com/vavas/go_services/logger"
 	"os"

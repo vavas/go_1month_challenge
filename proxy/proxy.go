@@ -22,7 +22,7 @@ func New(config *config.Config, logger *zap.Logger) (*Proxy, error) {
 
 	proxy := &Proxy{
 		config:   config,
-		logger: logger,
+		logger:   logger,
 		handlers: make([]*Handler, 0),
 	}
 	for _, handlerConfig := range config.Handlers {
