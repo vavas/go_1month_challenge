@@ -3,8 +3,9 @@ package proxy
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"github.com/vavas/go_1month_challenge/config"
+	"github.com/vavas/go_mc_gateway/config"
 	"github.com/vavas/go_services/services/extsrv"
+	"go.uber.org/zap"
 
 	"log"
 	"net/http"
@@ -13,13 +14,15 @@ import (
 
 type Proxy struct {
 	config   *config.Config
+	logger   *zap.Logger
 	handlers []*Handler
 }
 
-func New(config *config.Config) (*Proxy, error) {
+func New(config *config.Config, logger *zap.Logger) (*Proxy, error) {
 
 	proxy := &Proxy{
 		config:   config,
+		logger: logger,
 		handlers: make([]*Handler, 0),
 	}
 	for _, handlerConfig := range config.Handlers {

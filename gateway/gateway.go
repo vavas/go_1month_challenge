@@ -2,12 +2,10 @@ package gateway
 
 import (
 	"github.com/go-errors/errors"
-	"github.com/vavas/go_1month_challenge/config"
-	"github.com/vavas/go_1month_challenge/proxy"
-	"github.com/vavas/go_1month_challenge/server"
+	"github.com/vavas/go_mc_gateway/config"
+	"github.com/vavas/go_mc_gateway/proxy"
+	"github.com/vavas/go_mc_gateway/server"
 	"go.uber.org/zap"
-
-	"log"
 )
 
 type Gateway struct {
@@ -25,7 +23,7 @@ func New(config *config.Config, logger *zap.Logger) (*Gateway, error) {
 		logger: logger,
 	}
 
-	proxy, err := proxy.New(config)
+	proxy, err := proxy.New(config, logger)
 	if err != nil {
 		return gtw, errors.Errorf("proxy.New")
 	}
@@ -36,7 +34,7 @@ func New(config *config.Config, logger *zap.Logger) (*Gateway, error) {
 		return gtw, errors.Errorf("server.New")
 	}
 
-	log.Println("Server created")
+	logger.Debug("Server created")
 	gtw.server = srv
 
 	return gtw, nil

@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/vavas/go_1month_challenge/config"
-	"github.com/vavas/go_1month_challenge/middlewares/cors"
-	"github.com/vavas/go_1month_challenge/middlewares/request_logger"
-	"github.com/vavas/go_1month_challenge/proxy"
+	"github.com/vavas/go_mc_gateway/config"
+	"github.com/vavas/go_mc_gateway/middlewares/cors"
+	"github.com/vavas/go_mc_gateway/middlewares/request_logger"
+	"github.com/vavas/go_mc_gateway/proxy"
 )
 
 type Server struct {
@@ -76,7 +76,7 @@ func (s *Server) setupHTTPServer() error {
 		MaxHeaderBytes:    1 << 20,
 	}
 
-	log.Println("HTTP server created")
+	s.logger.Debug("HTTP server created")
 
 	return nil
 }
@@ -84,23 +84,23 @@ func (s *Server) setupHTTPServer() error {
 // setupGinMiddleware is used by New to attach all gin middleware required by
 // the server's request pipeline.
 func (s *Server) setupGinMiddleware() error {
-	log.Println("Setting up gin middleware")
+	s.logger.Debug("Setting up gin middleware")
 
 	s.gin.Use(cors.Cors)
 	s.gin.Use(requestlogger.RequestLogger(s.logger))
 	s.gin.Use(func(c *gin.Context) { c.Set("config", s.config) })
-	log.Println("Gin middleware set up")
+	s.logger.Debug("Gin middleware set up")
 
 	return nil
 }
 
 func (s *Server) setupGinRoutes() error {
-	log.Println("Setting up gin routes")
+	s.logger.Debug("Setting up gin routes")
 	s.gin.Use(s.proxy.GetHandler)
 
 	s.gin.Use(s.proxy.HandleRequest)
 
-	log.Println("Gin routes set up")
+	s.logger.Debug("Gin routes set up")
 
 	return nil
 }

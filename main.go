@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/vavas/go_1month_challenge/config"
-	"github.com/vavas/go_1month_challenge/gateway"
+	"github.com/vavas/go_mc_gateway/config"
+	"github.com/vavas/go_mc_gateway/gateway"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -17,7 +17,7 @@ var (
 	configPath = kingpin.Flag("config", "Path to config file.").Short('c').ExistingFile()
 )
 
-// go run ~/Work/telemetrytv/src/github.com/vavas/go_1month_challenge/main.go -c ~/Work/telemetrytv/src/github.com/vavas/go_1month_challenge/config.toml
+// go run ~/Work/telemetrytv/src/github.com/vavas/go_mc_gateway/main.go -c ~/Work/telemetrytv/src/github.com/vavas/go_mc_gateway/config.toml
 
 func main() {
 	kingpin.Parse()
@@ -25,8 +25,18 @@ func main() {
 	// Load config
 	conf := config.ReadConfig(*configPath)
 
+	println("")
+	println("")
+	println("__   ____ ___   ____ _ ___")
+	println("\\ \\ / / _` \\ \\ / / _` / __|")
+	println(" \\ V / (_| |\\ V / (_| \\__ \\")
+	println("  \\_/ \\__,_| \\_/ \\__,_|___/")
+	println("  API Gateway")
+	println("")
+	println("")
+
 	// Init logger
-	logger.InitLogging("go_gateway_1mc")
+	logger.InitLogging("go_mc_gateway")
 	log := logger.Logger
 
 	// Connect to Nats

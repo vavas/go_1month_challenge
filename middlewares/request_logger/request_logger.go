@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/vavas/go_1month_challenge/internals/stats"
+	"github.com/vavas/go_mc_gateway/internals/stats"
 	"github.com/vavas/go_services/utils"
 )
 
